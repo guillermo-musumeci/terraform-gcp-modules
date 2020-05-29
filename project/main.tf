@@ -21,22 +21,14 @@ locals {
   parent_type = split("/", var.parent)[0]
   parent_id   = split("/", var.parent)[1]
   prefix      = var.prefix == null ? "" : "${var.prefix}-"
-}
-
-# generate random id
-resource "random_string" "random-id" {
-  length  = 4
-  special = false
-  number  = true
-  upper   = false
-  lower   = true
+  suffix      = var.suffix == null ? "" : "-${var.suffix}"
 }
 
 # create a gcp project
 resource "google_project" "project" {
   org_id              = local.parent_type == "organizations" ? local.parent_id : null
   folder_id           = local.parent_type == "folders" ? local.parent_id : null
-  project_id          = "${local.prefix}${var.name}-{random_string.random-id.result}"
+  project_id          = "${local.prefix}${var.name}-${local.suffix}"
   name                = "${local.prefix}${var.name}"
   billing_account     = var.billing_account
   auto_create_network = var.auto_create_network
