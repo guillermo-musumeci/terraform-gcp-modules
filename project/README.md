@@ -1,6 +1,6 @@
 # GCP Project Module
 
-Improved version of the ** terraform-google-modules/cloud-foundation-fabric/module/project**
+Improved version of the **terraform-google-modules/cloud-foundation-fabric/module/project**
 
 ## Examples
 
